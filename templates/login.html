@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block body %}
+  <form method="post" action="/login">
+    <input type="hidden" name="redirect_to" value="{{ redirect_to }}" />
+    <input type="text" placeholder="username" name="username" /> |
+    <input type="password" placeholder="password" name="password" />
+    <input type="submit" />
+  </form>
+{% endblock %}

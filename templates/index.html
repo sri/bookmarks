@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block body %}
+total bookmarks: {{ total_bookmarks_count }}
+<form method="get" action="search">
+  <input type="text" placeholder="search..." name="t" />
+  <input type="submit" />
+</form>
+<table>
+  <tr><th colspan=2><span class="header">random</span></th></tr>
+  {% for bookmark in random_bookmarks %}
+    <tr>
+      <td>
+        <a href="{{ bookmark.url }}" target=_blank rel="noreferrer" rel="noopener">{{ (bookmark.title or bookmark.url)|truncate(82) }}</a>
+        <a href="/bookmark/{{ bookmark.id }}">@</a>
+        {{ bookmark.created_at }}
+      </td>
+      <td>
+        {% for name in bookmark.alltags() %}
+          <span class="tag"><a href="/tag/{{ name }}">{{ name }}</a></span>
+        {% endfor %}
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+
+<table>
+  <tr><th colspan=2><span class="header">recent</span></th></tr>
+  {% for bookmark in most_recent %}
+    <tr>
+      <td>
+        <a href="{{ bookmark.url }}" target=_blank>{{ (bookmark.title or bookmark.url)|truncate(82) }}</a>
+        <a href="/bookmark/{{ bookmark.id }}">@</a>
+        <span class="when">{{ bookmark.created_at }}</span>
+      </td>
+      <td>
+        {% for name in bookmark.alltags() %}
+          <span class="tag"><a href="/tag/{{ name }}">{{ name }}</a></span>
+        {% endfor %}
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+<hr/>
+<a href="/logout">logout</a>
+
+{% endblock %}

@@ -1,0 +1,2 @@
+. .env
+~/.poetry/bin/poetry run flask run

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  <a href="/">[home]</a><br/>
+  total bookmarks in tag: {{ bookmarks|length }}<br/>
+  {% for bookmark in bookmarks %}
+    <a href="{{ bookmark['url'] }}" target=_blank  rel="noreferrer" rel="noopener">{{ (bookmark["title"] or bookmark["url"])|truncate(82) }}</a>
+    <a href="/bookmark/{{ bookmark['id'] }}">@</a>
+    <span class="when">{{ bookmark.created_at }}</span>
+    <br/>
+  {% endfor %}
+  </table>
+{% endblock %}

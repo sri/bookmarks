@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block body %}
+  <script>
+    function submitAndClose() {
+      var data = new FormData();
+      var form = document.forms["add-bookmark-form"];
+      data.append("url", form["url"].value);
+      data.append("title", form["title"].value);
+      data.append("tags", form["tags"].value);
+      data.append("notes", form["notes"].value);
+
+      var req = new XMLHttpRequest();
+      req.onload = function() {
+        if (this.responseText === "added") {
+          window.close();
+        } else {
+          alert("error: " + this.responseText);
+        }
+      };
+
+      req.open("POST", form["action"], false);
+      req.send(data);
+
+      return false;
+    }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') window.close(); });
+  </script>
+  {% if existing %}
+    Previously save on {{ existing.created_at }}
+  {% endif %}
+  {% if existing %}
+    <form method="post" action="/update_bookmark/{{ existing.id }}?json=1" name="add-bookmark-form">
+  {% else %}
+    <form method="post" action="/add" name="add-bookmark-form">
+  {% endif %}
+      <input type="text" placeholder="url" name="url" value="{{ url }}" size=75 /><br/>
+      <input type="text" placeholder="title" name="title" value="{{ title }}" size=75 /><br/>
+      <input type="text" placeholder="tags" name="tags" id="tags"
+        value="{{ tags|join(' ') }}" size=75 autofocus autocorrect="off" autocapitalize="off" /><br/>
+      <textarea name="notes" rows="20" cols="30">{{ notes }}</textarea><br/>
+      {% if existing %}
+        <input type="button" value="update bookmark" onclick="submitAndClose()" />
+      {% else %}
+        <input type="button" value="add bookmark" onclick="submitAndClose()" />
+      {% endif %}
+    </form>
+  <script>
+    // submit when enter is hit on tags
+    document.getElementById("tags").addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        submitAndClose();
+      }
+    });
+  </script>
+{% endblock %}

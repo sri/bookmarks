@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+  <form method="post" action="/update_bookmark/{{ bookmark.id }}">
+    <input type="submit" value="update bookmark"  /><br/>
+    <input type="text" placeholder="url" name="url" value="{{ bookmark.url }}" size=100 /><br/>
+    <input type="text" placeholder="title" name="title" value="{{ bookmark.title }}" size=100 /><br/>
+    <input type="text" placeholder="tags" name="tags" size=100  autocorrect="off" autocapitalize="off" value="{{ " ".join(bookmark.alltags()) }}" /><br/>
+    <textarea name="notes" rows="20" cols="50">{{ bookmark.notes }}</textarea><br/>
+    <input type="submit" value="update bookmark"  /><br/>
+  </form>
+  <hr/>
+  <form method="post" action="/delete_bookmark/{{ bookmark.id }}"
+    onsubmit="return confirm('Do you really want to submit the form?');">
+    <input type="submit" value="delete bookmark"  />
+  </form>
+{% endblock %}
