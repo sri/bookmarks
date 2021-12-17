@@ -4,7 +4,9 @@ This is extracted from a simple bookmark service that I run on my personal serve
 * Python 3: https://github.com/python/cpython
 * Flask: https://github.com/pallets/flask
 * Flask-Login: https://github.com/maxcountryman/flask-login
-* peewee: for ORM, https://github.com/coleifer/peewee
+* peewee: for ORM; https://github.com/coleifer/peewee
+* Poetry: to install dependencies; https://github.com/python-poetry/poetry
+* SQLite: for the db, https://www.sqlite.org/index.html
 
 ### Install and Run
 
