@@ -17,7 +17,7 @@ poetry install
 3. Run: `./run`
 4. Login with username and password set in the `.env` file.
    And see https://flask.palletsprojects.com/en/2.0.x/config/ on how to create a SECRET_KEY.
-5. Use the following bookmarklet to save websites from the tab you are on:
+5. Use the following bookmarklet to bookmark websites from the tab you are on:
 ```
 javascript:q=location.href;if(document.getSelection){d=document.getSelection();}else{d='';};p=document.title;void(open('http://localhost:5000/add?showtags=yes&url='+encodeURIComponent(q)+'&notes='+encodeURIComponent(d)+'&title='+encodeURIComponent(p),'Bookmarks', 'toolbar=no,width=700,height=600'));
 ```
